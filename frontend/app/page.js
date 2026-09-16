@@ -13,7 +13,7 @@ export default function Home() {
   const [end, setEnd] = useState("");
 
   useEffect(() => {
-    fetch("https://meeting-room-booking-e539.onrender.com")
+    fetch("https://meeting-room-booking-e539.onrender.com/api/rooms")
     .then(r=>r.json())
     .then(setRooms);
   }, []);
@@ -28,7 +28,7 @@ export default function Home() {
     if(!roomId ||!date ||!title ||!start ||!end) return toast.error("Please fill all fields");
 
     try {
-      const res = await fetch("https://meeting-room-booking-e539.onrender.com", {
+      const res = await fetch("https://meeting-room-booking-e539.onrender.com/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ room_id: Number(roomId), title, date, start_time: start, end_time: end }),
