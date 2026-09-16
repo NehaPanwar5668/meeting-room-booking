@@ -15,6 +15,7 @@ app.add_middleware(
     "http://127.0.0.1:3000",
      "https://meeting-room-booking-mauve.vercel.app"
     ],
+     allow_origin_regex=r"https://meeting-room-booking-.*\.vercel\.app",
     allow_methods=["*"],
     allow_headers=["*"]
 )
