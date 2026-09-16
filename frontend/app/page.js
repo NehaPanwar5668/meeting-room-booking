@@ -13,13 +13,13 @@ export default function Home() {
   const [end, setEnd] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/rooms")
+    fetch("https://meeting-room-booking-e539.onrender.com")
     .then(r=>r.json())
     .then(setRooms);
   }, []);
 
   useEffect(() => {
-    if(date) fetch(`http://127.0.0.1:8000/api/bookings?date=${date}`)
+    if(date) fetch(`https://meeting-room-booking-e539.onrender.com/api/bookings?date=${date}`)
       .then(r=>r.json())
     .then(setBookings);
   }, [date]);
@@ -28,7 +28,7 @@ export default function Home() {
     if(!roomId ||!date ||!title ||!start ||!end) return toast.error("Please fill all fields");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/bookings", {
+      const res = await fetch("https://meeting-room-booking-e539.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ room_id: Number(roomId), title, date, start_time: start, end_time: end }),
@@ -49,7 +49,7 @@ export default function Home() {
 
   const handleCancel = async (id) => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/bookings/${id}`, { method: "DELETE" });
+      const res = await fetch(`https://meeting-room-booking-e539.onrender.com/api/bookings/${id}`, { method: "DELETE" });
       const data = await res.json();
       if(!res.ok) toast.error(data.detail || "Cancel failed");
       else {
